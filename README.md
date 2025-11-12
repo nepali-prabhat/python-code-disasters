@@ -1,5 +1,5 @@
 # python-code-disasters
-.
+..
 
 ## What is it all about?
 I am, due to my work, seeing a lot of code written by other developers. Sometimes this code is so bad, that it is worth showing to the outer world.
