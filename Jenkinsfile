@@ -67,6 +67,9 @@ pipeline {
                     cat temp_merge/* | sed 's#gs://cpo1-data/##' > merged_file.txt
                     echo "Merged file contents:"
                     cat merged_file.txt
+                    rm -rf temp_merge
+                    rm merged_file.txt
+                    rm output_dir.txt
                 '''
             }
         }
