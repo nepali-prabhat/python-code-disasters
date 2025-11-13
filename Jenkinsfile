@@ -64,7 +64,7 @@ pipeline {
                     rm -rf temp_merge merged_file.txt || true
                     mkdir temp_merge
                     gsutil -m cp "$OUTPUT_DIR/**" temp_merge
-                    cat temp_merge/* > merged_file.txt
+                    cat temp_merge/* | sed 's#gs://cpo1-data/##' > merged_file.txt
                     echo "Merged file contents:"
                     cat merged_file.txt
                 '''
