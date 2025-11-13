@@ -28,6 +28,9 @@ pipeline {
                     gsutil ls "$BUCKET_DATA/**" \
                         | grep -v '/\\.[^/]*$' \
                         | grep -v '__' \
+                        | grep -v 'temp_merge/' \
+                        | grep -v 'merged_file.txt' \
+                        | grep -v 'output_dir.txt' \
                         > filelist.txt
 
                     gsutil cp filelist.txt "$BUCKET_SCRIPTS/filenames/filelist.txt"
