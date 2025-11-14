@@ -10,14 +10,14 @@ pipeline {
         CLUSTER = 'cpo1-dataprocclusterlocal'
         VERSION = 'v0.0.1'
 
-        SONAR_TOKEN = credentials('sonar-token-id') // Jenkins credentials ID
+        SONAR_TOKEN = credentials('sonar-token-id') 
     }
 
     stages {
 
         stage('SonarQube Analysis') {
             steps {
-                withSonarQubeEnv('SonarQube') { // Must match Jenkins config name
+                withSonarQubeEnv('SonarQube') { 
                     sh '''
                         /opt/sonar-scanner/bin/sonar-scanner \
                           -Dsonar.projectKey=test-2 \
@@ -25,6 +25,17 @@ pipeline {
                           -Dsonar.host.url=http://34.69.251.47:9000 \
                           -Dsonar.login=$SONAR_TOKEN
                     '''
+                }
+            }
+        }
+
+        stage('Wait for Quality Gate') {
+            steps {
+                script {
+                    def qg = waitForQualityGate()
+                    if (qg.status != 'OK') {
+                        error "SonarQube quality gate failed: ${qg.status}"
+                    }
                 }
             }
         }
@@ -97,10 +108,10 @@ pipeline {
 
     post {
         failure {
-            echo 'Pipeline failed ❌'
+            echo 'Pipeline failed xxx'
         }
         success {
-            echo 'Pipeline completed successfully ✅'
+            echo 'Pipeline completed successfully!'
         }
     }
 }
