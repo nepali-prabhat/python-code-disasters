@@ -9,9 +9,26 @@ pipeline {
         ZONE = 'northamerica-northeast2-c'
         CLUSTER = 'cpo1-dataprocclusterlocal'
         VERSION = 'v0.0.1'
+
+        SONAR_TOKEN = credentials('sonar-token-id') // Jenkins credentials ID
     }
 
     stages {
+
+        stage('SonarQube Analysis') {
+            steps {
+                withSonarQubeEnv('SonarQube') { // Must match Jenkins config name
+                    sh '''
+                        /opt/sonar-scanner/bin/sonar-scanner \
+                          -Dsonar.projectKey=test-2 \
+                          -Dsonar.sources=. \
+                          -Dsonar.host.url=http://34.69.251.47:9000 \
+                          -Dsonar.login=$SONAR_TOKEN
+                    '''
+                }
+            }
+        }
+
         stage('Upload Repo Files to GCS') {
             steps {
                 echo 'Uploading all repo files to GCS...'
