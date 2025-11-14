@@ -10,7 +10,7 @@ pipeline {
         CLUSTER = 'cpo1-dataprocclusterlocal'
         VERSION = 'v0.0.1'
 
-        SONAR_TOKEN = credentials('sonar-token-id') 
+        SONAR_TOKEN = credentials('sonar-token-prabhat') 
     }
 
     stages {
@@ -21,7 +21,7 @@ pipeline {
                         /opt/sonar-scanner/bin/sonar-scanner \
                           -Dsonar.projectKey=test-2 \
                           -Dsonar.sources=. \
-                          -Dsonar.host.url=http://34.69.251.47:9000 \
+                          -Dsonar.host.url=http://34.130.63.213:9000 \
                           -Dsonar.login=$SONAR_TOKEN
                     '''
                 }
