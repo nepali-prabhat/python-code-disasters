@@ -21,7 +21,7 @@ pipeline {
                         /opt/sonar-scanner/bin/sonar-scanner \
                           -Dsonar.projectKey=test-2 \
                           -Dsonar.sources=. \
-                          -Dsonar.host.url=http://34.130.63.213:9000 \
+                          -Dsonar.host.url=http://34.130.130.59:9000 \
                           -Dsonar.login=$SONAR_TOKEN
                     '''
                 }
