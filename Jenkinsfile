@@ -97,6 +97,7 @@ pipeline {
                     cat temp_merge/* | sed 's#gs://cpo1-data/##' > merged_file.txt
                     echo "Merged file contents:"
                     cat merged_file.txt
+                    gsutil cp merged_file.txt "$BUCKET_SCRIPTS/filenames/output-$(date +%s).txt"
                     rm -rf temp_merge
                     rm merged_file.txt
                     rm output_dir.txt
